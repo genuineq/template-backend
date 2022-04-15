@@ -194,4 +194,5 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'frontend_url' => env('APP_FRONTEND_URL', 'http://localhost:4000/'),
 ];

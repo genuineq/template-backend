@@ -6,11 +6,17 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\RecoverPasswordRequest;
 use App\Http\Requests\ResetPasswordRequest;
-use Illuminate\Support\Facades\Hash;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Models\User;
 
-class RegisterController extends Controller
+use App\Models\PasswordReset;
+use App\Mail\SendRecoverPasswordMail;
+use App\Mail\PasswordChangedMail;
+
+class AuthController extends Controller
 {
     public function register(RegisterRequest $request): object
     {
@@ -48,15 +54,7 @@ class RegisterController extends Controller
         $passwordReset = $validated['email'];
 
         if ($user) {
-            $passwordReset = PasswordReset::updateOrCreate(
-                ['email' => $user->email],
-                [
-                    'email' => $user->email,
-                    'token' => Str::random(60)
-                ]
-            );
-
-            $url = config('app.frontend_url') . '/dashboard/reset/' . $passwordReset->token;
+            $url = config('app.frontend_url') . '/reset-password?token=' . Str::random(60);
             $data = array(
                 'name' => $user->name,
                 'url' => $url
