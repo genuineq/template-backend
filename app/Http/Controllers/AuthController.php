@@ -39,8 +39,8 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        $success['token'] =  $user->createToken('Authorization')->plainTextToken;
-        $success['name'] =  $user->name;
+        $success['token'] = $user->createToken('Authorization')->plainTextToken;
+        $success['name'] = $user->name;
 
         return $this->sendResponse($success, 'User login successfully.');
     }
@@ -54,7 +54,15 @@ class AuthController extends Controller
         $passwordReset = $validated['email'];
 
         if ($user) {
-            $url = config('app.frontend_url') . '/reset-password?token=' . Str::random(60);
+            $passwordReset = PasswordReset::updateOrCreate(
+                ['email' => $user->email],
+                [
+                    'email' => $user->email,
+                    'token' => Str::random(60)
+                ]
+            );
+
+            $url = config('app.frontend_url') . '/reset-password?token=' . $passwordReset->token;
             $data = array(
                 'name' => $user->name,
                 'url' => $url
