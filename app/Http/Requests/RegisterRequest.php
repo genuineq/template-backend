@@ -13,7 +13,7 @@ class RegisterRequest extends BaseFormRequest
             'name' =>  ['required', 'string'],
             'email' => ['required', 'email', Rule::unique('users')],
             'password' => ['required'],
-            'password_confirmation' => ['required', 'same:password'],
+            'password_confirm' => ['required', 'same:password'],
         ];
     }
 }
