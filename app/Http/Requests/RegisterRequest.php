@@ -9,7 +9,7 @@ class RegisterRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'tandc' => ['required'],
+            'terms_and_conditions' => ['required'],
             'name' =>  ['required', 'string'],
             'email' => ['required', 'email', Rule::unique('users')],
             'password' => ['required'],
