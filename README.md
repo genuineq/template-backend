@@ -62,3 +62,22 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+# Template Project Backend
+
+## Formatting using PHP Coding Standard Fixer
+
+We are using the php cs fixer package in order to format the php files in the project. The package also has a corresponding vs code extension. This extension has been added to the extension.json file as recommended.
+
+The way the package works is that we provide a set of files for it to parse and then it will apply a set of rules on those files. There is a .php-cs-fixer.php file in the root of the project where we can specify both the paths to the files and also the rules.
+
+There are some predefined coding standards like PSR1, PSR2, PSR12, but the package comes with some additional rules as well.
+
+In the following [link](https://gist.github.com/laravel-shift/cab527923ed2a109dda047b97d53c200) we can find a setup for rules in a laravel project.
+
+Using the vscode extension we can format the files on save, but there is also a command:
+```
+composer format
+```
+that will format all the files specified in the config file at once.

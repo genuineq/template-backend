@@ -3,18 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\RecoverPasswordRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetPasswordRequest;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use App\Models\User;
-
-use App\Models\PasswordReset;
-use App\Mail\SendRecoverPasswordMail;
 use App\Mail\PasswordChangedMail;
+use App\Mail\SendRecoverPasswordMail;
+use App\Models\PasswordReset;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -63,10 +63,10 @@ class AuthController extends Controller
             );
 
             $url = config('app.frontend_url') . '/reset-password?token=' . $passwordReset->token;
-            $data = array(
+            $data = [
                 'name' => $user->name,
                 'url' => $url
-            );
+            ];
 
             Mail::to($user->email)->send(new SendRecoverPasswordMail($data));
         }
