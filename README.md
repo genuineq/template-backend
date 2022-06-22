@@ -81,3 +81,14 @@ Using the vscode extension we can format the files on save, but there is also a 
 composer format
 ```
 that will format all the files specified in the config file at once.
+
+## Testing
+
+The project is set up to run tests independent of the actual database of the project. The tests use an sqlite database that runs in memory so the modified data doesnt interfere with the actual development database.
+
+The tests are split between two folders, Feature(more complex test) and Unit(atomic tests).
+
+To run the tests execute the follwing command:
+```
+php artisan test
+```
