@@ -32,6 +32,7 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request): object
     {
+        // \Cache::store('redis')->put('Laradock', 'Awesome', 100);
         $credentials = $request->validated();
 
         if (!Auth::attempt($credentials)) {
