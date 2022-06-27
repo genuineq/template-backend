@@ -6,14 +6,16 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RecoverPasswordRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\ResetPasswordRequest;
+use App\Jobs\ProcessTest;
 use App\Mail\PasswordChangedMail;
 use App\Mail\SendRecoverPasswordMail;
 use App\Models\PasswordReset;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
@@ -32,7 +34,9 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request): object
     {
-        // \Cache::store('redis')->put('Laradock', 'Awesome', 100);
+        ProcessTest::dispatch();
+        // \Cache::store('redis')->put('Laradock', 'Awesome', 150);
+        // \Log::info(\Cache::get('Laradock'));
         $credentials = $request->validated();
 
         if (!Auth::attempt($credentials)) {
