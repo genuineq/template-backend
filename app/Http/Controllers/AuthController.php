@@ -20,6 +20,22 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    /**
+     * Add a new pet to the store.
+     *
+     * @OA\Post(
+     *     path="/pet",
+     *     tags={"pet"},
+     *     operationId="addPet",
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     ),
+     *     security={
+     *         {"petstore_auth": {"write:pets", "read:pets"}}
+     *     }
+     * )
+     */
     public function register(RegisterRequest $request): object
     {
         $validated = $request->validated();
