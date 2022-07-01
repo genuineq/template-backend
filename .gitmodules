@@ -1,0 +1,4 @@
+[submodule "citr-laradock"]
+	path = citr-laradock
+	url = https://github.com/genuineq/citr-laradock.git
+    branch = template-laradock
